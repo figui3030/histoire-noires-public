@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0c0a0d">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Histoires Noires</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Écran 1 : choix de l'histoire -->
+  <div id="screen-stories" class="screen active">
+    <h1 class="app-title">HISTOIRES NOIRES</h1>
+    <p class="subtitle">Choisissez une affaire.</p>
+    <div id="stories-list" class="stories-list"></div>
+  </div>
+
+  <!-- Écran 2 : prologue (texte + personnages) -->
+  <div id="screen-prologue" class="screen">
+    <button id="btn-back-stories-2" class="link-btn top-left">← Histoires</button>
+    <div class="prologue-scroll">
+      <h1 id="prologue-title" class="prologue-title"></h1>
+      <div id="prologue-text" class="prologue-text"></div>
+      <div id="prologue-characters" class="prologue-characters"></div>
+      <button id="btn-to-menu" class="start-btn prologue-continue">Continuer</button>
+    </div>
+  </div>
+
+  <!-- Écran 3 : choix de la difficulté -->
+  <div id="screen-menu" class="screen">
+    <button id="btn-back-prologue" class="link-btn top-left">← Retour</button>
+    <h1 id="menu-title"></h1>
+    <p id="menu-tagline" class="subtitle"></p>
+    <p id="menu-intro" class="subtitle"></p>
+
+    <div class="menu-card">
+      <h2>Difficulté</h2>
+      <div id="difficulty-options" class="difficulty-options"></div>
+      <button id="btn-start" class="start-btn"></button>
+    </div>
+  </div>
+
+  <!-- Écran 4 : partie en cours -->
+  <div id="screen-game" class="screen screen-game">
+    <div class="game-header">
+      <button id="btn-menu" class="link-btn">← Menu</button>
+      <div class="stats">
+        <span id="stat-remaining"></span>
+        <span id="stat-clue-count"></span>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="clues" id="tab-btn-clues"></button>
+      <button class="tab-btn" data-tab="suspects" id="tab-btn-suspects"></button>
+    </div>
+
+    <div class="game-body">
+      <!-- Onglet dossier d'indices : effet page qui tourne -->
+      <div id="tab-clues" class="tab-panel active">
+        <div class="dossier">
+          <div class="page-viewport">
+            <div id="clue-page" class="page">
+              <div class="page-number" id="clue-page-number"></div>
+              <div class="page-content" id="clue-page-content"></div>
+            </div>
+          </div>
+          <div class="page-nav">
+            <button id="btn-prev-clue" class="page-nav-btn">◀</button>
+            <span id="clue-page-indicator" class="page-indicator"></span>
+            <button id="btn-next-clue" class="page-nav-btn"></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Onglet suspects : grille (desktop) ou carnet (mobile), décidé en JS -->
+      <div id="tab-suspects" class="tab-panel">
+        <div id="suspects-grid-view">
+          <input id="filter-input" type="text" placeholder="Rechercher un nom...">
+          <div id="suspects-grid" class="suspects-grid"></div>
+        </div>
+
+        <div id="notebook-view" class="notebook" style="display:none;">
+          <input id="notebook-search" type="text" placeholder="Rechercher un nom...">
+          <div class="notebook-tabs" id="notebook-tabs"></div>
+          <div class="page-viewport notebook-viewport">
+            <div id="notebook-page" class="page">
+              <div class="page-content" id="notebook-page-content"></div>
+            </div>
+          </div>
+          <div class="page-nav">
+            <button id="btn-prev-notebook" class="page-nav-btn">◀</button>
+            <span id="notebook-page-indicator" class="page-indicator"></span>
+            <button id="btn-next-notebook" class="page-nav-btn">▶</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accuse-bar">
+      <input id="accuse-input" type="text" placeholder="">
+      <button id="btn-accuse"></button>
+    </div>
+  </div>
+
+  <!-- Écran 5 : résultat -->
+  <div id="screen-result" class="screen">
+    <div id="result-card" class="result-card">
+      <div id="result-content"></div>
+      <div id="result-stamp" class="stamp"></div>
+    </div>
+    <button id="btn-replay" class="start-btn">Rejouer</button>
+  </div>
+
+  <script src="data/stories.js?v=5" defer></script>
+  <script src="game.js?v=5" defer></script>
+  <script src="app.js?v=5" defer></script>
+</body>
+</html>
